@@ -1,0 +1,174 @@
+@startuml "Shipment Tracker"
+
+interface UserInterface
+
+class TrackerViewHelper {
+    + shipmentId: State<String>
+    + shipmentTotes: State<String[]>
+    + shipmentUpdateHistory: State<String[]>
+    + expectedShipmentDeliveryDate: State<String[]>
+    + shipmentStatus: State<String>
+    All attributes have a private setter
+    in this class
+
+    + trackShipment(id: String)
+    + stopTracking()
+}
+
+interface ShipmentObserver {
+    + update(shipment: Shipment)
+}
+
+interface ShipmentObservable {
+    + addObserver(observer: ShipmentObserver)
+    + removeObserver(observer: ShipmentObserver)
+    + notifyObservers()
+}
+
+note "TrackerViewHelper has the responsibility of preparing data for the using interface to display." as viewHelperNote
+
+abstract class ShippingUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class CreatedUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class ShippedUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class LocationUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class DeliveredUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class DelayedUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class LostUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class CanceledUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+class NoteAddedUpdate {
+    + previousStatus: String
+    + newStatus: String
+    + timestamp: Long
+}
+
+interface GetNoteStrategy {
+    + getNote(): String
+}
+
+class NoNoteStrategy {
+    + getNote(): String
+}
+
+class NoteStrategy {
+    + getNote(): String
+}
+
+class LocationStrategy {
+    + getLocation(): String
+}
+
+class NoLocationStrategy {
+    + getLocation(): String
+}
+
+class ExpectedDeliveryDateStrategy {
+    + getExpectedDeliveryDate(): Long
+}
+
+class NoExpectedDeliveryDateStrategy {
+    + getExpectedDeliveryDate(): Long
+}
+
+interface GetLocationStrategy {
+    + getLocation(): String
+}
+
+interface GetExpectedDeliveryDateStrategy {
+    + getExpectedDeliveryDate(): Long
+}
+
+class Shipment {
+    +status: String
+    +id: String
+    +notes: String[]
+    private set;
+    +updateHistory: ShippingUpdate[]
+    private set;
+    +expectedDeliveryDateTimestamp: Long
+    +currentLocation: String
+    +addNote(note: String)
+    +addUpdate(update: Update)
+}
+
+class TrackingSimulator {
+    - shipments: Shipment[]
+    + findShipment(id: String): Shipment?
+    + addShipment(shipment: Shipment)
+    + runSimulation()
+    + updateFactory(updateString: String)
+}
+
+note "TrackingSimulator is a static class that can be accessed anywhere" as tsimnote
+
+ShippingUpdate <|.u. GetNoteStrategy
+ShippingUpdate <|.u. GetLocationStrategy
+ShippingUpdate <|.u. GetExpectedDeliveryDateStrategy
+
+GetNoteStrategy <|-- NoNoteStrategy
+GetNoteStrategy <|-- NoteStrategy
+GetLocationStrategy <|-- LocationStrategy
+GetLocationStrategy <|-- NoLocationStrategy
+GetExpectedDeliveryDateStrategy <|-- ExpectedDeliveryDateStrategy
+GetExpectedDeliveryDateStrategy <|-- NoExpectedDeliveryDateStrategy
+
+ShippingUpdate <|-- CreatedUpdate
+ShippingUpdate <|-- ShippedUpdate
+ShippingUpdate <|-- LocationUpdate
+ShippingUpdate <|-- DeliveredUpdate
+ShippingUpdate <|-- DelayedUpdate
+ShippingUpdate <|-- LostUpdate
+ShippingUpdate <|-- CanceledUpdate
+ShippingUpdate <|-- NoteAddedUpdate
+
+TrackerViewHelper ..|> ShipmentObserver
+ShipmentObservable ..> ShipmentObserver
+Shipment ..|> ShipmentObservable
+UserInterface --> TrackerViewHelper
+note on link: Creates and uses
+TrackerViewHelper -- viewHelperNote
+TrackingSimulator -- tsimnote
+
+Shipment --o TrackingSimulator
+ShippingUpdate --* Shipment
+
+@enduml
