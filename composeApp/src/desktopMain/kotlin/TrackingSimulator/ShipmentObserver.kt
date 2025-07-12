@@ -1,0 +1,4 @@
+package TrackingSimulator
+
+interface ShipmentObserver {
+}

@@ -1,0 +1,4 @@
+package TrackingSimulator
+
+class Shipment {
+}
