@@ -130,7 +130,7 @@ class Shipment {
     +addUpdate(update: Update)
 }
 
-class TrackingSimulator {
+class trackingSimulator {
     - shipments: Shipment[]
     + findShipment(id: String): Shipment?
     + addShipment(shipment: Shipment)
@@ -138,7 +138,7 @@ class TrackingSimulator {
     + updateFactory(updateString: String)
 }
 
-note "TrackingSimulator is a static class that can be accessed anywhere" as tsimnote
+note "trackingSimulator is a static class that can be accessed anywhere" as tsimnote
 
 ShippingUpdate <|.u. GetNoteStrategy
 ShippingUpdate <|.u. GetLocationStrategy
@@ -166,9 +166,9 @@ Shipment ..|> ShipmentObservable
 UserInterface --> TrackerViewHelper
 note on link: Creates and uses
 TrackerViewHelper -- viewHelperNote
-TrackingSimulator -- tsimnote
+trackingSimulator -- tsimnote
 
-Shipment --o TrackingSimulator
+Shipment --o trackingSimulator
 ShippingUpdate --* Shipment
 
 @enduml

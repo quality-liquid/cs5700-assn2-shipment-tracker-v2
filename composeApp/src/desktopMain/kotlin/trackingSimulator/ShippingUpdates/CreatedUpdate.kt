@@ -1,4 +1,4 @@
-package TrackingSimulator.ShippingUpdates
+package trackingSimulator.ShippingUpdates
 
 class CreatedUpdate(updateString: String) : ShippingUpdate(updateString) {
     fun getId() {

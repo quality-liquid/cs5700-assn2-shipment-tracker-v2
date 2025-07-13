@@ -1,4 +1,4 @@
-package TrackingSimulator
+package trackingSimulator
 
 class TrackingSimulator {
 }
