@@ -1,4 +1,4 @@
 package TrackingSimulator.ShippingUpdates
 
-class LostUpdate {
+class LostUpdate(updateString: String) : ShippingUpdate(updateString) {
 }

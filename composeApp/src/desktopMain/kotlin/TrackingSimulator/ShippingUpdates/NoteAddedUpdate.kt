@@ -1,4 +1,4 @@
 package TrackingSimulator.ShippingUpdates
 
-class NoteAddedUpdate {
+class NoteAddedUpdate(updateString: String) : ShippingUpdate(updateString) {
 }

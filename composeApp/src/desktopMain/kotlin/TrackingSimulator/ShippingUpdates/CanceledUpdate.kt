@@ -1,4 +1,4 @@
 package TrackingSimulator.ShippingUpdates
 
-class CanceledUpdate {
+class CanceledUpdate(updateString: String) : ShippingUpdate(updateString) {
 }

@@ -1,4 +1,4 @@
 package TrackingSimulator.ShippingUpdates
 
-class LocationUpdate {
+class LocationUpdate(updateString: String) : ShippingUpdate(updateString) {
 }

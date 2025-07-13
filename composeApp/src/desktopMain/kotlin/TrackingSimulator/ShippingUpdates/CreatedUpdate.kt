@@ -1,4 +1,7 @@
 package TrackingSimulator.ShippingUpdates
 
-class CreatedUpdate {
+class CreatedUpdate(updateString: String) : ShippingUpdate(updateString) {
+    fun getId() {
+        // TODO
+    }
 }

@@ -1,4 +1,4 @@
 package TrackingSimulator.ShippingUpdates
 
-class DelayedUpdate {
+class DelayedUpdate(updateString: String) : ShippingUpdate(updateString) {
 }
