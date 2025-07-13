@@ -1,4 +1,4 @@
-package UserInterface
+package userInterface
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

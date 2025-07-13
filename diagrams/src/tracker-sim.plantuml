@@ -1,6 +1,6 @@
 @startuml "Shipment Tracker"
 
-interface UserInterface
+interface userInterface
 
 class TrackerViewHelper {
     + shipmentId: State<String>
@@ -163,7 +163,7 @@ ShippingUpdate <|-- NoteAddedUpdate
 TrackerViewHelper ..|> ShipmentObserver
 ShipmentObservable ..> ShipmentObserver
 Shipment ..|> ShipmentObservable
-UserInterface --> TrackerViewHelper
+userInterface --> TrackerViewHelper
 note on link: Creates and uses
 TrackerViewHelper -- viewHelperNote
 trackingSimulator -- tsimnote
