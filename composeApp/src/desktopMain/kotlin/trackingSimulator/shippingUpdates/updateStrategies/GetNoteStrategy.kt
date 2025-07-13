@@ -1,4 +1,4 @@
-package trackingSimulator.ShippingUpdates.UpdateStrategies
+package trackingSimulator.shippingUpdates.updateStrategies
 
 interface GetNoteStrategy {
     abstract fun getNote(): String?

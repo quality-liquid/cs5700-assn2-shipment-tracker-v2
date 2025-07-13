@@ -1,7 +1,7 @@
 package trackingSimulator
 
-import trackingSimulator.ShippingUpdates.CreatedUpdate
-import trackingSimulator.ShippingUpdates.ShippingUpdate
+import trackingSimulator.shippingUpdates.CreatedUpdate
+import trackingSimulator.shippingUpdates.ShippingUpdate
 
 class Shipment(
     update: CreatedUpdate

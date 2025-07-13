@@ -1,4 +1,0 @@
-package trackingSimulator.ShippingUpdates.UpdateStrategies
-
-class NewExpectedDeliveryDateStrategy {
-}

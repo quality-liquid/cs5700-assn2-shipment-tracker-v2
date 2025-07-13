@@ -1,4 +1,4 @@
-package trackingSimulator.ShippingUpdates
+package trackingSimulator.shippingUpdates
 
 class ShippedUpdate(updateString: String) : ShippingUpdate(updateString) {
 }

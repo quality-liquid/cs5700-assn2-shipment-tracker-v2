@@ -1,8 +1,8 @@
-package trackingSimulator.ShippingUpdates
+package trackingSimulator.shippingUpdates
 
-import trackingSimulator.ShippingUpdates.UpdateStrategies.GetExpectedDeliveryDateStrategy
-import trackingSimulator.ShippingUpdates.UpdateStrategies.GetLocationStrategy
-import trackingSimulator.ShippingUpdates.UpdateStrategies.GetNoteStrategy
+import trackingSimulator.shippingUpdates.updateStrategies.GetExpectedDeliveryDateStrategy
+import trackingSimulator.shippingUpdates.updateStrategies.GetLocationStrategy
+import trackingSimulator.shippingUpdates.updateStrategies.GetNoteStrategy
 
 abstract class ShippingUpdate(
     val updateString: String,
