@@ -7,5 +7,7 @@ abstract class ShippingUpdate(
         // TODO
     }
 
-    fun get
+    fun getId(): String {
+        // TODO
+    }
 }

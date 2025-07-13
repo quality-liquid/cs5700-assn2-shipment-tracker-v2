@@ -6,6 +6,7 @@ import TrackingSimulator.ShippingUpdates.ShippingUpdate
 class Shipment(
     update: CreatedUpdate
 ) {
+    val id: String = update.getId()
     var status: String = update.getStatus()
         private set
     val notes: MutableList<String> = mutableListOf()
