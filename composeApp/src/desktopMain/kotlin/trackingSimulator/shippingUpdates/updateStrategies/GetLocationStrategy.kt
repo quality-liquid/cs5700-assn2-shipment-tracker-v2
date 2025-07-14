@@ -1,5 +1,5 @@
 package trackingSimulator.shippingUpdates.updateStrategies
 
 interface GetLocationStrategy {
-    abstract fun getLocation(): String?
+    abstract fun getLocation(updateSplit: List<String>): String?
 }

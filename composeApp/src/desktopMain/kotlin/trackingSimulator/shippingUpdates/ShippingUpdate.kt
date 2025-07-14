@@ -23,15 +23,15 @@ abstract class ShippingUpdate(
     }
 
     fun getLocation(): String? {
-        return this.locationStrategy.getLocation()
+        return this.locationStrategy.getLocation(updateSplit)
     }
 
     fun getDeliveryDate(): Long? {
-        return this.deliveryDateStrategy.getDeliveryDate()
+        return this.deliveryDateStrategy.getDeliveryDate(updateSplit)
     }
 
     fun getNote(): String? {
-        return this.noteStrategy.getNote()
+        return this.noteStrategy.getNote(updateSplit)
     }
 
 }

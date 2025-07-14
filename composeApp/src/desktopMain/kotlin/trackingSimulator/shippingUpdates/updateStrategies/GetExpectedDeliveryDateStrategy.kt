@@ -1,5 +1,5 @@
 package trackingSimulator.shippingUpdates.updateStrategies
 
 interface GetExpectedDeliveryDateStrategy {
-    abstract fun getDeliveryDate(): Long?
+    abstract fun getDeliveryDate(updateSplit: List<String>): Long?
 }

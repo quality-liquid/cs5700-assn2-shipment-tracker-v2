@@ -1,7 +1,7 @@
 package trackingSimulator.shippingUpdates.updateStrategies
 
 class NoLocationStrategy: GetLocationStrategy {
-    override fun getLocation(): String? {
+    override fun getLocation(updateSplit: List<String>): String? {
         TODO("Not yet implemented")
     }
 }
