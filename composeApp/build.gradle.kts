@@ -36,11 +36,11 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "UserInterface.MainKt"
+        mainClass = "trackingSimulator.TrackingSimulatorKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "UserInterface"
+            packageName = "TrackingSimulator"
             packageVersion = "1.0.0"
         }
     }

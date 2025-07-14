@@ -10,13 +10,10 @@ abstract class ShippingUpdate(
     val updateSplit: List<String> = updateString.split(",")
     val status = updateSplit[0]
     val shipmentId = updateSplit[1]
+    val timestamp = updateSplit[2].toLong()
     abstract val locationStrategy: GetLocationStrategy
     abstract val deliveryDateStrategy: GetExpectedDeliveryDateStrategy
     abstract val noteStrategy: GetNoteStrategy
-
-    fun getStatus(): String {
-        return this.status
-    }
 
     fun getId(): String {
         return this.shipmentId
