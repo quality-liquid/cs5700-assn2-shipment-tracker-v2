@@ -1,4 +1,7 @@
 package trackingSimulator.shippingUpdates.updateStrategies
 
-class NoExpectedDeliveryDateStrategy {
+class NoExpectedDeliveryDateStrategy: GetExpectedDeliveryDateStrategy {
+    override fun getDeliveryDate(): Long? {
+        TODO("Not yet implemented")
+    }
 }
