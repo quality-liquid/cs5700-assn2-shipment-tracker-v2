@@ -19,8 +19,23 @@ class Shipment(
         private set
 
     fun addUpdate(update: ShippingUpdate) {
-        // TODO
-        // update instance vars
-        // call notify observers
+        this.status = update.getStatus()
+        val note: String? = update.getNote()
+        val expectedDeliveryDate: Long? = update.getDeliveryDate()
+        val location: String? = update.getLocation()
+
+        // update the shipment history
+        this._update_history += update
+
+        // if there are updates to notes, delivery date, or location, update them
+        if (note != null) {
+            this._notes += note
+        }
+        if (expectedDeliveryDate != null) {
+            this.expected_delivery_date_timestamp = expectedDeliveryDate
+        }
+        if (location != null) {
+            this.current_location = location
+        }
     }
 }
