@@ -13,8 +13,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+
+// Helper function to convert hex string to Color
+fun String.toColor(): Color {
+    return Color(this.removePrefix("#").toLong(16) or 0x00000000FF000000)
+}
 
 @Composable
 @Preview
@@ -92,6 +98,8 @@ fun App() {
                             )
                             Text(
                                 text = "Status: ${tracker.status}",
+                                color = tracker.getStatusColor().toColor(),
+                                style = MaterialTheme.typography.titleMedium,
                                 modifier = Modifier.padding(top = 4.dp)
                             )
                             
