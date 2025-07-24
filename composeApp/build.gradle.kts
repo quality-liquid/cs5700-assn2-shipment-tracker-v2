@@ -22,6 +22,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation("io.ktor:ktor-server-core:3.2.2")
+            implementation("io.ktor:ktor-server-netty:3.2.2")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
