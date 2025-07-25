@@ -1,6 +1,8 @@
 package trackingSimulator.shipmentDecorators
 
-import trackingSimulator.shippingUpdates.CreatedUpdate
+import trackingSimulator.Shipment
+import trackingSimulator.shipmentDecorators.ShipmentDecorator
 
-class ExpressDecorator(update: CreatedUpdate): ShipmentDecorator(update) {
+class ExpressDecorator(shipment: Shipment): ShipmentDecorator(shipment) {
+    // Add express-specific behavior here
 }

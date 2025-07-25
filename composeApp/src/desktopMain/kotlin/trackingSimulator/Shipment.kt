@@ -3,7 +3,7 @@ package trackingSimulator
 import trackingSimulator.shippingUpdates.CreatedUpdate
 import trackingSimulator.shippingUpdates.ShippingUpdate
 
-abstract class Shipment(
+class Shipment(
     update: CreatedUpdate
 ): ShipmentObservable {
     val id: String = update.getId()
@@ -35,7 +35,7 @@ abstract class Shipment(
         }
     }
 
-    open fun addUpdate(update: ShippingUpdate) {
+    fun addUpdate(update: ShippingUpdate) {
         this.status = update.status
         val note: String? = update.getNote()
         val expectedDeliveryDate: Long? = update.getDeliveryDate()

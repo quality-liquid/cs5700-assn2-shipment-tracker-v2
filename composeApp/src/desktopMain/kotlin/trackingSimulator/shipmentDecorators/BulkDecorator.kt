@@ -1,6 +1,8 @@
 package trackingSimulator.shipmentDecorators
 
-import trackingSimulator.shippingUpdates.CreatedUpdate
+import trackingSimulator.Shipment
+import trackingSimulator.shipmentDecorators.ShipmentDecorator
 
-class BulkDecorator(update: CreatedUpdate): ShipmentDecorator(update) {
+class BulkDecorator(shipment: Shipment): ShipmentDecorator(shipment) {
+    // Add bulk-specific behavior here
 }

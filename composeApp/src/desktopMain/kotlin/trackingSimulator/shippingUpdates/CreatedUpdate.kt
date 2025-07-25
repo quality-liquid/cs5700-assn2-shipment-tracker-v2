@@ -8,4 +8,9 @@ class CreatedUpdate(updateString: String) : ShippingUpdate(updateString) {
     override val locationStrategy = NoLocationStrategy()
     override val noteStrategy = NoNoteStrategy()
     override val deliveryDateStrategy = NoExpectedDeliveryDateStrategy()
+
+    fun getShipmentType(): String {
+        updateSplit: List<String> = updateString.split(",")
+        return updateSplit[3]
+    }
 }

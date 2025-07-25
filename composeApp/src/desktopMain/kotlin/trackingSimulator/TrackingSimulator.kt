@@ -138,7 +138,10 @@ class TrackingSimulator {
     }
 
     fun addShipment(creationUpdate: CreatedUpdate) {
-        val shipment = Shipment(creationUpdate)
+        var shipment = Shipment(creationUpdate)
+        if (creationUpdate.getShipmentType() == "express") {
+            shipment = ExpressShipment(shipment)
+        }
         this._shipments[shipment.id] = shipment
     }
 
