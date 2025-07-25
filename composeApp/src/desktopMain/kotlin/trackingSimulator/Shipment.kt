@@ -6,16 +6,16 @@ import trackingSimulator.shippingUpdates.ShippingUpdate
 class Shipment(
     update: CreatedUpdate
 ): ShipmentInterface {
-    val id: String = update.getId()
+    override val id: String = update.getId()
     private val _notes: MutableList<String> = mutableListOf()
-    val notes: List<String> get() = _notes
+    override val notes: List<String> get() = _notes
     private val _update_history: MutableList<ShippingUpdate> = mutableListOf(update)
-    val update_history: List<ShippingUpdate> get() = _update_history
-    var status: String = update.status
+    override val update_history: List<ShippingUpdate> get() = _update_history
+    override var status: String = update.status
         private set
-    var expected_delivery_date_timestamp: Long? = null
+    override var expected_delivery_date_timestamp: Long? = null
         private set
-    var current_location: String? = null
+    override var current_location: String? = null
         private set
 
     // observer stuff
@@ -35,7 +35,7 @@ class Shipment(
         }
     }
 
-    fun addUpdate(update: ShippingUpdate) {
+    override fun addUpdate(update: ShippingUpdate) {
         this.status = update.status
         val note: String? = update.getNote()
         val expectedDeliveryDate: Long? = update.getDeliveryDate()

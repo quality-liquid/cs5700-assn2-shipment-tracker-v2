@@ -2,6 +2,7 @@ package userInterface
 
 import androidx.compose.runtime.*
 import trackingSimulator.Shipment
+import trackingSimulator.ShipmentInterface
 import trackingSimulator.ShipmentObserver
 import trackingSimulator.simulator
 import java.text.SimpleDateFormat
@@ -11,7 +12,7 @@ class TrackerViewHelper(
     shipmentId: String
 ) : ShipmentObserver {
     
-    private val shipment: Shipment? = simulator.findShipment(shipmentId)
+    private val shipment: ShipmentInterface? = simulator.findShipment(shipmentId)
     
     val shipmentId: String = shipmentId
     val isValid: Boolean = shipment != null
