@@ -2,6 +2,7 @@ package trackingSimulator
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import io.ktor.server.application.call
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,13 +18,12 @@ import trackingSimulator.shippingUpdates.ShippedUpdate
 import trackingSimulator.shippingUpdates.ShippingUpdate
 import userInterface.App
 import java.io.File
-
-
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.request.receiveText
+import userInterface.Client
 
 val simulator: TrackingSimulator = TrackingSimulator()
 
@@ -64,33 +64,62 @@ class TrackingSimulator {
 
 
     fun runServer() {
-        embeddedServer(Netty, port=8888) {
-            routing {
-                post("/update") {
-                    val updateString = call.receiveText()
-                    call.respondText(updateString)
-                    val splitLine: List<String> = updateString.split(",")
-                    val id: String = splitLine[1]
-                    val shippingUpdate = updateFactory(updateString)
-                    if (shippingUpdate == null) {
-                        call.respondText("Invalid input")
-                    } else {
-                        if (shippingUpdate is CreatedUpdate) {
-                            addShipment(shippingUpdate)
-                            call.respondText("created shipment with id $id")
-                        } else {
-                            val shipment = findShipment(id)
-                            if (shipment != null) {
-                                _shipments[id]?.addUpdate(shippingUpdate)
-                                call.respondText("added update for id: $id")
-                            } else {
-                                call.respondText("no shipment with id $id")
+        println("Starting server on port 8888...")
+        try {
+            embeddedServer(Netty, port=8888) {
+                routing {
+                    post("/") {
+                        try {
+                            val updateString = call.receiveText()
+                            println("Received update: $updateString")
+                            
+                            val splitLine: List<String> = updateString.split(",")
+                            if (splitLine.size < 3) {
+                                println("Invalid input format: $updateString")
+                                call.respondText("Invalid input format - expected at least 3 comma-separated values")
+                                return@post
                             }
+                            
+                            val id: String = splitLine[1]
+                            val shippingUpdate = updateFactory(updateString)
+                            
+                            if (shippingUpdate == null) {
+                                println("Invalid update status: ${splitLine[0]}")
+                                call.respondText("Invalid update status: ${splitLine[0]}")
+                            } else {
+                                if (shippingUpdate is CreatedUpdate) {
+                                    addShipment(shippingUpdate)
+                                    val responseMessage = "Created shipment with id $id"
+                                    println(responseMessage)
+                                    call.respondText(responseMessage)
+                                } else {
+                                    val shipment = findShipment(id)
+                                    if (shipment != null) {
+                                        _shipments[id]?.addUpdate(shippingUpdate)
+                                        val responseMessage = "Added update for id: $id"
+                                        println(responseMessage)
+                                        call.respondText(responseMessage)
+                                    } else {
+                                        val responseMessage = "No shipment with id $id"
+                                        println(responseMessage)
+                                        call.respondText(responseMessage)
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            val errorMessage = "Server error: ${e.message}"
+                            println("Error processing request: ${e.message}")
+                            e.printStackTrace()
+                            call.respondText(errorMessage)
                         }
                     }
                 }
-            }
-        }.start(wait=false)
+            }.start(wait=false)
+            println("Server started successfully on port 8888")
+        } catch (e: Exception) {
+            println("Failed to start server: ${e.message}")
+            e.printStackTrace()
+        }
     }
 
     fun updateFactory(line: String): ShippingUpdate? {
@@ -128,6 +157,9 @@ fun main() {
     application {
         Window(onCloseRequest = ::exitApplication, title = "Shipment Tracker") {
             App()
+        }
+        Window(onCloseRequest = ::exitApplication, title = "Shipment Client") {
+            Client()
         }
     }
 }
