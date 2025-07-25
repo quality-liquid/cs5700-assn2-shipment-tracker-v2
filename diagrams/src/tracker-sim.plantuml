@@ -126,8 +126,27 @@ class Shipment {
     private set;
     +expectedDeliveryDateTimestamp: Long
     +currentLocation: String
-    +addNote(note: String)
     +addUpdate(update: Update)
+}
+
+abstract class ShipmentDecorator {
+    + shipment: Shipment
+    + addUpdate(update: ShippingUpdate)
+}
+
+class ExpressShipmentDecorator {
+    + shipment: Shipment
+    + addUpdate(update: ShippingUpdate)
+}
+
+class OvernightShipmentDecorator {
+    + shipment: Shipment
+    + addUpdate(update: ShippingUpdate)
+}
+
+class BulkShipmentDecorator {
+    + shipment: Shipment
+    + addUpdate(update: ShippingUpdate)
 }
 
 class trackingSimulator {
@@ -135,10 +154,18 @@ class trackingSimulator {
     + findShipment(id: String): Shipment?
     + addShipment(shipment: Shipment)
     + runSimulation()
+    + runServer()
     + updateFactory(updateString: String)
 }
 
 note "trackingSimulator is a static class that can be accessed anywhere" as tsimnote
+
+Shipment <|-r- ShipmentDecorator
+ShipmentDecorator *-- Shipment
+
+ShipmentDecorator <|-- ExpressShipmentDecorator
+ShipmentDecorator <|-- OvernightShipmentDecorator
+ShipmentDecorator <|-- BulkShipmentDecorator
 
 ShippingUpdate <|.u. GetNoteStrategy
 ShippingUpdate <|.u. GetLocationStrategy
