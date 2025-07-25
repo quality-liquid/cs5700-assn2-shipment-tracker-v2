@@ -1,7 +1,7 @@
 package trackingSimulator.shipmentDecorators
 
-import trackingSimulator.Shipment
+import trackingSimulator.ShipmentInterface
 
-class OvernightDecorator(shipment: Shipment): ShipmentDecorator(shipment) {
+class OvernightDecorator(shipment: ShipmentInterface): ShipmentDecorator(shipment) {
     // Add overnight-specific behavior here
 }

@@ -5,7 +5,7 @@ import trackingSimulator.shippingUpdates.ShippingUpdate
 
 class Shipment(
     update: CreatedUpdate
-): ShipmentObservable {
+): ShipmentInterface {
     val id: String = update.getId()
     private val _notes: MutableList<String> = mutableListOf()
     val notes: List<String> get() = _notes

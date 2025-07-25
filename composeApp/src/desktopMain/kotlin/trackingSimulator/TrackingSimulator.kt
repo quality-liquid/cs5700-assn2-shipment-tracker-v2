@@ -23,13 +23,16 @@ import io.ktor.server.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.request.receiveText
+import trackingSimulator.shipmentDecorators.BulkDecorator
+import trackingSimulator.shipmentDecorators.ExpressDecorator
+import trackingSimulator.shipmentDecorators.OvernightDecorator
 import userInterface.Client
 
 val simulator: TrackingSimulator = TrackingSimulator()
 
 class TrackingSimulator {
-    private val _shipments: MutableMap<String, Shipment> = mutableMapOf()
-    val shipments: Map<String, Shipment> get() = _shipments
+    private val _shipments: MutableMap<String, ShipmentInterface> = mutableMapOf()
+    val shipments: Map<String, ShipmentInterface> get() = _shipments
 
     private val scope = CoroutineScope(Dispatchers.Default)
 
@@ -138,14 +141,25 @@ class TrackingSimulator {
     }
 
     fun addShipment(creationUpdate: CreatedUpdate) {
-        var shipment = Shipment(creationUpdate)
-        if (creationUpdate.getShipmentType() == "express") {
-            shipment = ExpressShipment(shipment)
-        }
+        var shipment: ShipmentInterface = Shipment(creationUpdate)
+        val shipmentType: String = creationUpdate.getShipmentType()
+        shipment = simpleShipmentFactory(shipmentType, shipment)
         this._shipments[shipment.id] = shipment
     }
 
-    fun findShipment(id: String): Shipment? {
+    fun simpleShipmentFactory(type: String, shipment: ShipmentInterface) : ShipmentInterface {
+        if (type == "express") {
+            return ExpressDecorator(shipment)
+        } else if (type == "bulk") {
+            return BulkDecorator(shipment)
+        } else if (type == "overnight") {
+            return OvernightDecorator(shipment)
+        } else {
+            return shipment
+        }
+    }
+
+    fun findShipment(id: String): ShipmentInterface? {
         if (_shipments.containsKey(id)) {
             return _shipments[id]
         } else return null

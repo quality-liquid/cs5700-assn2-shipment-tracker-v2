@@ -1,11 +1,10 @@
 package trackingSimulator.shipmentDecorators
 
-import trackingSimulator.Shipment
-import trackingSimulator.ShipmentObservable
+import trackingSimulator.ShipmentInterface
 import trackingSimulator.ShipmentObserver
 import trackingSimulator.shippingUpdates.ShippingUpdate
 
-abstract class ShipmentDecorator(protected val decoratedShipment: Shipment): ShipmentObservable {
+abstract class ShipmentDecorator(protected val decoratedShipment: ShipmentInterface): ShipmentInterface {
     override fun addObserver(observer: ShipmentObserver) {
         decoratedShipment.addObserver(observer)
     }
@@ -18,15 +17,15 @@ abstract class ShipmentDecorator(protected val decoratedShipment: Shipment): Shi
         decoratedShipment.notifyObservers()
     }
 
-    open fun addUpdate(update: ShippingUpdate) {
+    override fun addUpdate(update: ShippingUpdate) {
         decoratedShipment.addUpdate(update)
     }
 
     // Delegate properties to the decorated shipment
-    val id: String get() = decoratedShipment.id
-    val notes: List<String> get() = decoratedShipment.notes
-    val update_history: List<ShippingUpdate> get() = decoratedShipment.update_history
-    val status: String get() = decoratedShipment.status
-    val expected_delivery_date_timestamp: Long? get() = decoratedShipment.expected_delivery_date_timestamp
-    val current_location: String? get() = decoratedShipment.current_location
+    override val id: String get() = decoratedShipment.id
+    override val notes: List<String> get() = decoratedShipment.notes
+    override val update_history: List<ShippingUpdate> get() = decoratedShipment.update_history
+    override val status: String get() = decoratedShipment.status
+    override val expected_delivery_date_timestamp: Long? get() = decoratedShipment.expected_delivery_date_timestamp
+    override val current_location: String? get() = decoratedShipment.current_location
 }

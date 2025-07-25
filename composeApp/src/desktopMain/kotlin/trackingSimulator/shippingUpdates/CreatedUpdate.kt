@@ -10,7 +10,6 @@ class CreatedUpdate(updateString: String) : ShippingUpdate(updateString) {
     override val deliveryDateStrategy = NoExpectedDeliveryDateStrategy()
 
     fun getShipmentType(): String {
-        updateSplit: List<String> = updateString.split(",")
         return updateSplit[3]
     }
 }
