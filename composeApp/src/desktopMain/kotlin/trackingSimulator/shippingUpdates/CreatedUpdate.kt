@@ -10,6 +10,8 @@ class CreatedUpdate(updateString: String) : ShippingUpdate(updateString) {
     override val deliveryDateStrategy = NoExpectedDeliveryDateStrategy()
 
     fun getShipmentType(): String {
-        return updateSplit[3]
+        if (updateSplit.size >= 3) {
+            return updateSplit[3]
+        } else return "standard"
     }
 }
