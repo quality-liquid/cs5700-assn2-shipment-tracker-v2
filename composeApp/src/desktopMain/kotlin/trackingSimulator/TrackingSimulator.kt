@@ -32,7 +32,7 @@ val simulator: TrackingSimulator = TrackingSimulator()
 
 class TrackingSimulator {
     private val _shipments: MutableMap<String, ShipmentInterface> = mutableMapOf()
-    val shipments: Map<String, ShipmentInterface> get() = _shipments
+    val shipments: Map<String, ShipmentInterface> get() = _shipments.toMap()
 
     private val scope = CoroutineScope(Dispatchers.Default)
 

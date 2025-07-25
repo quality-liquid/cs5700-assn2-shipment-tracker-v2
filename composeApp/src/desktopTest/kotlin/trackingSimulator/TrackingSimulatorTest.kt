@@ -48,7 +48,7 @@ class TrackingSimulatorTest {
     
     @Test
     fun testAddShipment() {
-        val createdUpdate = CreatedUpdate("created,TEST123,1000")
+        val createdUpdate = CreatedUpdate("created,TEST123,1000,standard")
         simulator.addShipment(createdUpdate)
         
         assertEquals(1, simulator.shipments.size)
@@ -58,7 +58,7 @@ class TrackingSimulatorTest {
     
     @Test
     fun testFindShipment() {
-        val createdUpdate = CreatedUpdate("created,TEST123,1000")
+        val createdUpdate = CreatedUpdate("created,TEST123,1000,standard")
         simulator.addShipment(createdUpdate)
         
         val foundShipment = simulator.findShipment("TEST123")
@@ -71,8 +71,8 @@ class TrackingSimulatorTest {
     
     @Test
     fun testMultipleShipments() {
-        val shipment1 = CreatedUpdate("created,SHIP001,1000")
-        val shipment2 = CreatedUpdate("created,SHIP002,2000")
+        val shipment1 = CreatedUpdate("created,SHIP001,1000,standard")
+        val shipment2 = CreatedUpdate("created,SHIP002,2000,standard")
         
         simulator.addShipment(shipment1)
         simulator.addShipment(shipment2)

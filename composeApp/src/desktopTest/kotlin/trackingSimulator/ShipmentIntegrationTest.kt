@@ -15,7 +15,7 @@ class ShipmentIntegrationTest {
     @Test
     fun testCompleteShipmentLifecycle() {
         // Create shipment
-        val createdUpdate = simulator.updateFactory("created,LIFECYCLE001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,LIFECYCLE001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("LIFECYCLE001")!!
@@ -65,7 +65,7 @@ class ShipmentIntegrationTest {
     
     @Test
     fun testDelayedShipment() {
-        val createdUpdate = simulator.updateFactory("created,DELAYED001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,DELAYED001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("DELAYED001")!!
@@ -85,7 +85,7 @@ class ShipmentIntegrationTest {
     
     @Test
     fun testMultipleNotes() {
-        val createdUpdate = simulator.updateFactory("created,NOTES001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,NOTES001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("NOTES001")!!
@@ -106,7 +106,7 @@ class ShipmentIntegrationTest {
     
     @Test
     fun testLocationUpdates() {
-        val createdUpdate = simulator.updateFactory("created,LOCATION001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,LOCATION001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("LOCATION001")!!
@@ -133,7 +133,7 @@ class ShipmentIntegrationTest {
     
     @Test
     fun testCanceledShipment() {
-        val createdUpdate = simulator.updateFactory("created,CANCELED001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,CANCELED001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("CANCELED001")!!
@@ -147,7 +147,7 @@ class ShipmentIntegrationTest {
     
     @Test
     fun testLostShipment() {
-        val createdUpdate = simulator.updateFactory("created,LOST001,1000") as CreatedUpdate
+        val createdUpdate = simulator.updateFactory("created,LOST001,1000,standard") as CreatedUpdate
         simulator.addShipment(createdUpdate)
         
         val shipment = simulator.findShipment("LOST001")!!
