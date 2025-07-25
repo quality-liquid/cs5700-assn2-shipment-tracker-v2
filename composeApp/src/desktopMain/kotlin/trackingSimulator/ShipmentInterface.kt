@@ -11,4 +11,5 @@ interface ShipmentInterface : ShipmentObservable {
     val current_location: String?
     
     fun addUpdate(update: ShippingUpdate)
+    fun addNote(note: String) {}
 }

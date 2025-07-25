@@ -35,6 +35,10 @@ class Shipment(
         }
     }
 
+    override fun addNote(note: String) {
+        _notes += note
+    }
+
     override fun addUpdate(update: ShippingUpdate) {
         this.status = update.status
         val note: String? = update.getNote()
